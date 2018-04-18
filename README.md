@@ -18,4 +18,4 @@ Med-Manager is a simple app that helps patients remember  to take their medicati
 * LiveData - Handle data in a lifecycle-aware fashion 
 * ViewModel - Manage your UI's data in a lifecycle-aware fashion
 
-[Wireframes using figma](https://www.figma.com/file/Z42GOwG7wzbkRHkk3WG83Hvt/Med-Manager "Figma wireframe")
+[Med Manager wireframe using figma](https://www.figma.com/file/Z42GOwG7wzbkRHkk3WG83Hvt/Med-Manager "Figma wireframe")
