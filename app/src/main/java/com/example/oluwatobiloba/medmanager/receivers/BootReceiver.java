@@ -75,7 +75,7 @@ public class BootReceiver extends BroadcastReceiver {
                 if (mRepeat.equals("true")) {
                     mAlarmReceiver.setRepeatAlarm(context, mCalendar, mReceivedID, mRepeatTime);
                 } else if (mRepeat.equals("false")) {
-                    mAlarmReceiver.setAlarm(context, mCalendar, mReceivedID);
+                    mAlarmReceiver.setAlarm(context, mCalendar, mReceivedID, mRepeatTime);
                 }
             }
         }

@@ -426,7 +426,7 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
         if (mRepeat.equals("true")) {
             new AlarmReceiver().setRepeatAlarm(getApplicationContext(), mCalendar, ID, mRepeatTime);
         } else if (mRepeat.equals("false")) {
-            new AlarmReceiver().setAlarm(getApplicationContext(), mCalendar, ID);
+            new AlarmReceiver().setAlarm(getApplicationContext(), mCalendar, ID, mRepeatTime);
         }
 
         // Create toast to confirm new reminder

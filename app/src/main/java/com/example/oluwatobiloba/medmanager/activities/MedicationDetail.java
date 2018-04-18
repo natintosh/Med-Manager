@@ -100,6 +100,7 @@ public class MedicationDetail extends AppCompatActivity {
 
         if (hasDueDatePass()) {
             new AlarmReceiver().cancelAlarm(this, (int) medicationId);
+            Toast.makeText(this, "Due date is today reminder cancelled", Toast.LENGTH_SHORT).show();
         } else {
             saveReminder();
         }
@@ -191,7 +192,7 @@ public class MedicationDetail extends AppCompatActivity {
         if (mRepeat.equals("true")) {
             new AlarmReceiver().setRepeatAlarm(getApplicationContext(), calendar, ID, mRepeatTime);
         } else if (mRepeat.equals("false")) {
-            new AlarmReceiver().setAlarm(getApplicationContext(), calendar, ID);
+            new AlarmReceiver().setAlarm(getApplicationContext(), calendar, ID, mRepeatTime);
         }
     }
 

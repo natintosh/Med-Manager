@@ -56,7 +56,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         nManager.notify(mReceivedID, mBuilder.build());
     }
 
-    public void setAlarm(Context context, Calendar calendar, int ID) {
+    public void setAlarm(Context context, Calendar calendar, int ID, long RepeatTime) {
         mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         // Put Reminder ID in Intent Extra
@@ -69,9 +69,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         long currentTime = c.getTimeInMillis();
         long diffTime = calendar.getTimeInMillis() - currentTime;
 
-        // Start alarm using notification time
         mAlarmManager.set(AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime() + diffTime,
+                SystemClock.elapsedRealtime() + RepeatTime,
                 mPendingIntent);
 
         // Restart alarm if device is rebooted
@@ -95,9 +94,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         long currentTime = c.getTimeInMillis();
         long diffTime = calendar.getTimeInMillis() - currentTime;
 
-        // Start alarm using initial notification time and repeat interval time
         mAlarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime() + diffTime,
+                SystemClock.elapsedRealtime() + RepeatTime,
                 RepeatTime, mPendingIntent);
 
         // Restart alarm if device is rebooted
