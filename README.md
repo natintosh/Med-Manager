@@ -19,3 +19,8 @@ Med-Manager is a simple app that helps patients remember  to take their medicati
 * ViewModel - Manage your UI's data in a lifecycle-aware fashion
 
 [Med Manager wireframe using figma](https://www.figma.com/file/Z42GOwG7wzbkRHkk3WG83Hvt/Med-Manager "Figma wireframe")
+
+
+#### Med Manager v1
+---
+[Med Manager v1](https://github.com/natintosh/Med-Manager-v1 "Med Manager v1")
