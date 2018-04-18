@@ -1,3 +1,6 @@
+#### Med-Manager
+
+
 | Application Functions:  |   |
 |---|---|
 |   |  Users should be able to signup / login with Google social authentication  |
