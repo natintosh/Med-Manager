@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUserMetadata;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -71,7 +72,8 @@ public class SplashScreen extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 FirebaseUser user = mFirebaseAuth.getCurrentUser();
-                FirebaseUserMetadata metadata = user.getMetadata();
+                FirebaseUserMetadata metadata = Objects.requireNonNull(user).getMetadata();
+                assert metadata != null;
                 if (metadata.getCreationTimestamp() == metadata.getLastSignInTimestamp()) {
                     Toast.makeText(this, "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                     launchIntent(new Intent(SplashScreen.this, EditProfile.class));
@@ -85,7 +87,7 @@ public class SplashScreen extends AppCompatActivity {
                     return;
                 }
 
-                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                if (Objects.requireNonNull(response.getError()).getErrorCode() == ErrorCodes.NO_NETWORK) {
                     showToast(R.string.no_internet_connection);
                     return;
                 }

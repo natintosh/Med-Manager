@@ -23,6 +23,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class UserProfile extends AppCompatActivity {
 
@@ -54,7 +55,7 @@ public class UserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         database = AppDatabase.getAppDatabase(this);
@@ -126,7 +127,6 @@ public class UserProfile extends AppCompatActivity {
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
         } else if (id == R.id.action_signout) {
-            NavUtils.navigateUpFromSameTask(this);
             FirebaseAuth.getInstance().signOut();
             finish();
         }

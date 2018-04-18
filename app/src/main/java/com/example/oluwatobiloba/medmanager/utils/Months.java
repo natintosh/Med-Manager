@@ -14,19 +14,8 @@ public enum Months {
         monthName = name;
     }
 
-    public String getMonthById(int id) {
-        return Months.values()[id].monthName;
-    }
-
-    public Months[] getAllMonths() {
-        return Months.values();
-    }
-
     public String getMonthName() {
         return monthName;
     }
 
-    public int getMonthId() {
-        return monthId;
-    }
 }

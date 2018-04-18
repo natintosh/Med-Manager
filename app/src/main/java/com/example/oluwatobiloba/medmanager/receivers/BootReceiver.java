@@ -60,10 +60,6 @@ public class BootReceiver extends BroadcastReceiver {
                 mCalendar.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY));
                 mCalendar.set(Calendar.MINUTE, c.get(Calendar.MINUTE));
 
-                // Cancel existing notification of the reminder by using its ID
-                // mAlarmReceiver.cancelAlarm(context, mReceivedID);
-
-                // Check repeat type
                 if (mRepeatType.equals("Minute")) {
                     mRepeatTime = Integer.parseInt(mRepeatNo) * milMinute;
                 } else if (mRepeatType.equals("Hour")) {

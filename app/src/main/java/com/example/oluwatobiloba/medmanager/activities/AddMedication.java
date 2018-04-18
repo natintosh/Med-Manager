@@ -35,6 +35,7 @@ import com.example.oluwatobiloba.medmanager.utils.DateTimeHelper;
 import com.example.oluwatobiloba.medmanager.utils.TaskHelper;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class AddMedication extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -71,7 +72,7 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
 
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(R.string.title_activity_add_medication);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_activity_add_medication);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -99,8 +100,6 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
         mRepeatNumber = "1";
         mRepeatType = "Hour";
         mRepeat = "true";
-
-        Calendar calendar = Calendar.getInstance();
 
         mCalendar = Calendar.getInstance();
         mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
@@ -245,10 +244,10 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
         boolean on = ((Switch) view).isChecked();
         if (on) {
             mRepeat = "true";
-            mRepeatTv.setText("Every " + mRepeatNumber + " " + mRepeatType + "(s)");
+            mRepeatTv.setText(String.format("Every %s %s(s)", mRepeatNumber, mRepeatType));
         } else {
             mRepeat = "false";
-            mRepeatTv.setText("Off");
+            mRepeatTv.setText(R.string.repeat_text_off);
         }
     }
 
@@ -267,11 +266,11 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
                         if (input.getText().toString().length() == 0) {
                             mRepeatNumber = Integer.toString(1);
                             mRepeatNumberTv.setText(mRepeatNumber);
-                            mRepeatTv.setText("Every " + mRepeatNumber + " " + mRepeatType + "(s)");
+                            mRepeatTv.setText(String.format("Every %s %s(s)", mRepeatNumber, mRepeatType));
                         } else {
                             mRepeatNumber = input.getText().toString().trim();
                             mRepeatNumberTv.setText(mRepeatNumber);
-                            mRepeatTv.setText("Every " + mRepeatNumber + " " + mRepeatType + "(s)");
+                            mRepeatTv.setText(String.format("Every %s %s(s)", mRepeatNumber, mRepeatType));
                         }
                     }
                 });
@@ -301,7 +300,7 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
 
                 mRepeatType = items[item];
                 mRepeatTypeTv.setText(mRepeatType);
-                mRepeatTv.setText("Every " + mRepeatNumber + " " + mRepeatType + "(s)");
+                mRepeatTv.setText(String.format("Every %s %s(s)", mRepeatNumber, mRepeatType));
             }
         });
         AlertDialog alert = builder.create();
@@ -336,7 +335,6 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
         mCalendar = Calendar.getInstance();
         mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         mCalendar.set(Calendar.MINUTE, minute);
-        TextView textView = mDateTimeHelper.getTextView();
         String time = (minute < 10 ? (hourOfDay + ":0" + minute) : (hourOfDay + ":" + minute));
         mDateTimeHelper.getTextView().setText(time);
         mTime = mCalendar.getTimeInMillis();
@@ -406,16 +404,22 @@ public class AddMedication extends AppCompatActivity implements DatePickerDialog
         mCalendar.set(Calendar.SECOND, 0);
 
         // Check repeat type
-        if (mRepeatType.equals("Minute")) {
-            mRepeatTime = Integer.parseInt(mRepeatNumber) * milMinute;
-        } else if (mRepeatType.equals("Hour")) {
-            mRepeatTime = Integer.parseInt(mRepeatNumber) * milHour;
-        } else if (mRepeatType.equals("Day")) {
-            mRepeatTime = Integer.parseInt(mRepeatNumber) * milDay;
-        } else if (mRepeatType.equals("Week")) {
-            mRepeatTime = Integer.parseInt(mRepeatNumber) * milWeek;
-        } else if (mRepeatType.equals("Month")) {
-            mRepeatTime = Integer.parseInt(mRepeatNumber) * milMonth;
+        switch (mRepeatType) {
+            case "Minute":
+                mRepeatTime = Integer.parseInt(mRepeatNumber) * milMinute;
+                break;
+            case "Hour":
+                mRepeatTime = Integer.parseInt(mRepeatNumber) * milHour;
+                break;
+            case "Day":
+                mRepeatTime = Integer.parseInt(mRepeatNumber) * milDay;
+                break;
+            case "Week":
+                mRepeatTime = Integer.parseInt(mRepeatNumber) * milWeek;
+                break;
+            case "Month":
+                mRepeatTime = Integer.parseInt(mRepeatNumber) * milMonth;
+                break;
         }
 
         // Create a new notification

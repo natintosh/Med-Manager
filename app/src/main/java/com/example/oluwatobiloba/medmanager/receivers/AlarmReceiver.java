@@ -13,8 +13,8 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
-import com.example.oluwatobiloba.medmanager.activities.MedicationDetail;
 import com.example.oluwatobiloba.medmanager.R;
+import com.example.oluwatobiloba.medmanager.activities.MedicationDetail;
 import com.example.oluwatobiloba.medmanager.database.AppDatabase;
 import com.example.oluwatobiloba.medmanager.models.Medication;
 

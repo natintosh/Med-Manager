@@ -27,37 +27,40 @@
             android:name=".activities.DashBoard"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/DashBoardTheme" />
-        <activity
-            android:name=".activities.EditProfile"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.AddMedication"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.oluwatobiloba.medmanager.activities.DashBoard" />
-        </activity>
-        <activity android:name=".activities.MedicationDetail">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.oluwatobiloba.medmanager.activities.DashBoard" />
-        </activity>
+            android:theme="@style/DashBoardTheme">
+    </activity>
 
-        <receiver android:name=".receivers.AlarmReceiver" />
-        <receiver android:name=".receivers.BootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+    <activity
+        android:name=".activities.EditProfile"
+        android:configChanges="orientation"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".activities.AddMedication"
+        android:configChanges="orientation"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.oluwatobiloba.medmanager.activities.DashBoard" />
+    </activity>
+    <activity android:name=".activities.MedicationDetail">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.oluwatobiloba.medmanager.activities.DashBoard" />
+    </activity>
 
-        <activity android:name=".activities.UserProfile">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.oluwatobiloba.medmanager.activities.DashBoard" /></activity>
-    </application>
+    <receiver android:name=".receivers.AlarmReceiver" />
+    <receiver android:name=".receivers.BootReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+        </intent-filter>
+    </receiver>
 
-</manifest>
+    <activity android:name=".activities.UserProfile">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.oluwatobiloba.medmanager.activities.DashBoard" />
+    </activity>
+</application>
+
+    </manifest>

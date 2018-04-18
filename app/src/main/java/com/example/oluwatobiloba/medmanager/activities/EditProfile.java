@@ -1,5 +1,6 @@
 package com.example.oluwatobiloba.medmanager.activities;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -70,7 +71,6 @@ public class EditProfile extends AppCompatActivity implements LoaderManager.Load
     FirebaseStorage mFirebaseStorage;
     StorageReference mStorageRef;
     private SpotsDialog mProgressDialog;
-    private UploadTask mUploadTask;
     private Uri mLocalImageUri;
 
     LoaderManager loaderManager;
@@ -246,7 +246,7 @@ public class EditProfile extends AppCompatActivity implements LoaderManager.Load
         StorageReference profileImagesRef = mStorageRef.child("images/" + imageLabel);
 
         if (mLocalImageUri != null) {
-            mUploadTask = profileImagesRef.putFile(mLocalImageUri);
+            UploadTask mUploadTask = profileImagesRef.putFile(mLocalImageUri);
             mUploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -258,17 +258,16 @@ public class EditProfile extends AppCompatActivity implements LoaderManager.Load
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    updateUserProfile(mFirebaseUser, downloadUrl);
+                    updateUserProfile(downloadUrl);
                 }
             });
         }
 
-        updateUserProfile(mFirebaseUser, null);
+        updateUserProfile(null);
     }
 
-    private void updateUserProfile(FirebaseUser user, final Uri profileImageUri) {
+    private void updateUserProfile(final Uri profileImageUri) {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(mName)
                 .setPhotoUri(profileImageUri)
@@ -299,6 +298,7 @@ public class EditProfile extends AppCompatActivity implements LoaderManager.Load
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     @NonNull
     @Override
     public Loader<Void> onCreateLoader(int id, @Nullable Bundle args) {

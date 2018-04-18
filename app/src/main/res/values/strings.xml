@@ -5,4 +5,5 @@
     <string name="sign_in_cancelled">Signing In cancelled</string>
     <string name="title_activity_add_medication">Add Medication</string>
     <string name="sort_month_label">Sort by month</string>
+    <string name="repeat_text_off">Off</string>
 </resources>

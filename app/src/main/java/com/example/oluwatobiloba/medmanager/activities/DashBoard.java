@@ -1,5 +1,6 @@
 package com.example.oluwatobiloba.medmanager.activities;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -52,7 +53,6 @@ public class DashBoard extends AppCompatActivity implements LoaderManager.Loader
 
     private static final int RC_INSERT_USER = 1003;
 
-    private static final String TAG = DashBoard.class.getSimpleName();
     AppDatabase database;
     FirebaseUser mFirebaseUser;
     FirebaseFirestore mFirestore;
@@ -68,8 +68,6 @@ public class DashBoard extends AppCompatActivity implements LoaderManager.Loader
     ConstraintLayout mConstraintLayout;
     FloatingActionButton mAddNewFab;
     Spinner mMonthSpinner;
-
-    private LoaderManager loaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +85,7 @@ public class DashBoard extends AppCompatActivity implements LoaderManager.Loader
             monthsList.add(month.getMonthName());
         }
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, monthsList);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -101,12 +99,16 @@ public class DashBoard extends AppCompatActivity implements LoaderManager.Loader
 
         if (user == null) {
             if (ConnectionUtils.isConnected(this)) {
-                loaderManager = getSupportLoaderManager();
+                LoaderManager loaderManager = getSupportLoaderManager();
                 Loader<String> loader = loaderManager.getLoader(RC_INSERT_USER);
                 if (loader == null) {
                     loaderManager.initLoader(RC_INSERT_USER, null, DashBoard.this);
+                    finish();
+                    startActivity(getIntent());
                 } else {
                     loaderManager.restartLoader(RC_INSERT_USER, null, DashBoard.this);
+                    finish();
+                    startActivity(getIntent());
                 }
             } else {
                 loadRecyclerView();
@@ -206,6 +208,7 @@ public class DashBoard extends AppCompatActivity implements LoaderManager.Loader
         finish();
     }
 
+    @SuppressLint("StaticFieldLeak")
     @NonNull
     @Override
     public Loader<Void> onCreateLoader(final int id, @Nullable Bundle args) {
@@ -267,7 +270,6 @@ public class DashBoard extends AppCompatActivity implements LoaderManager.Loader
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_signout) {
-            NavUtils.navigateUpFromSameTask(this);
             FirebaseAuth.getInstance().signOut();
             finish();
         } else if (id == R.id.action_account) {

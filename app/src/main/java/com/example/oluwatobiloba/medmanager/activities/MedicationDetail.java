@@ -17,10 +17,9 @@ import com.example.oluwatobiloba.medmanager.models.Medication;
 import com.example.oluwatobiloba.medmanager.receivers.AlarmReceiver;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class MedicationDetail extends AppCompatActivity {
-
-    public static final String TAG = MedicationDetail.class.getSimpleName();
 
     public static final String EXTRA_MEDICATION_ID = "medication_ID";
 
@@ -61,7 +60,7 @@ public class MedicationDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medication_detail);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         Intent intent = getIntent();
@@ -162,30 +161,37 @@ public class MedicationDetail extends AppCompatActivity {
     }
 
     public void saveReminder() {
-        AppDatabase database = AppDatabase.getAppDatabase(this);
 
         // Set up calender for creating the notification
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(mStart);
 
         // Check repeat type
-        if (mIntevalType.equals("Minute")) {
-            mRepeatTime = Integer.parseInt(mInterval) * milMinute;
-        } else if (mIntevalType.equals("Hour")) {
-            mRepeatTime = Integer.parseInt(mInterval) * milHour;
-        } else if (mIntevalType.equals("Day")) {
-            mRepeatTime = Integer.parseInt(mInterval) * milDay;
-        } else if (mIntevalType.equals("Week")) {
-            mRepeatTime = Integer.parseInt(mInterval) * milWeek;
-        } else if (mIntevalType.equals("Month")) {
-            mRepeatTime = Integer.parseInt(mInterval) * milMonth;
+        switch (mIntevalType) {
+            case "Minute":
+                mRepeatTime = Integer.parseInt(mInterval) * milMinute;
+                break;
+            case "Hour":
+                mRepeatTime = Integer.parseInt(mInterval) * milHour;
+                break;
+            case "Day":
+                mRepeatTime = Integer.parseInt(mInterval) * milDay;
+                break;
+            case "Week":
+                mRepeatTime = Integer.parseInt(mInterval) * milWeek;
+                break;
+            case "Month":
+                mRepeatTime = Integer.parseInt(mInterval) * milMonth;
+                break;
         }
+
+        int ID = (int) medicationId;
 
         // Create a new notification
         if (mRepeat.equals("true")) {
-            new AlarmReceiver().setRepeatAlarm(getApplicationContext(), calendar, (int) medicationId, mRepeatTime);
+            new AlarmReceiver().setRepeatAlarm(getApplicationContext(), calendar, ID, mRepeatTime);
         } else if (mRepeat.equals("false")) {
-            new AlarmReceiver().setAlarm(getApplicationContext(), calendar, (int) medicationId);
+            new AlarmReceiver().setAlarm(getApplicationContext(), calendar, ID);
         }
 
         // Create toast to confirm new reminder

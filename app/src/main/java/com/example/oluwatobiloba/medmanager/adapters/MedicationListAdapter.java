@@ -16,10 +16,8 @@ import java.util.List;
 
 public class MedicationListAdapter extends RecyclerView.Adapter<MedicationListAdapter.ViewHolder> {
 
-    private static final String TAG = MedicationListAdapter.class.getSimpleName();
-
-    List<Medication> mMedicationList;
-    List<Medication> mMedCopy;
+    private List<Medication> mMedicationList;
+    private List<Medication> mMedCopy;
 
     public MedicationListAdapter(List<Medication> medicationList) {
         this.mMedicationList = medicationList;
