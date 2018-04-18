@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Med Manager</string>
+    <string name="unknown_error">Unknown error has occurred</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="sign_in_cancelled">Signing In cancelled</string>
+    <string name="title_activity_add_medication">Add Medication</string>
+    <string name="sort_month_label">Sort by month</string>
+</resources>
