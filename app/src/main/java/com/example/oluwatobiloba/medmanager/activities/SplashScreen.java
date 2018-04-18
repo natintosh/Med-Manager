@@ -78,7 +78,7 @@ public class SplashScreen extends AppCompatActivity {
                     Toast.makeText(this, "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                     launchIntent(new Intent(SplashScreen.this, EditProfile.class));
                 } else {
-                    Toast.makeText(this, "Welcome back" + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Welcome back " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                     launchIntent(new Intent(SplashScreen.this, DashBoard.class));
                 }
             } else {
