@@ -193,12 +193,6 @@ public class MedicationDetail extends AppCompatActivity {
         } else if (mRepeat.equals("false")) {
             new AlarmReceiver().setAlarm(getApplicationContext(), calendar, ID);
         }
-
-        // Create toast to confirm new reminder
-        Toast.makeText(getApplicationContext(), "Saved ",
-                Toast.LENGTH_SHORT).show();
-
-        onBackPressed();
     }
 
 }
